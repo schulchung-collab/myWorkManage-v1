@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:reset": "node scripts/reset-db.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "lucide-react": "^1.61.0",

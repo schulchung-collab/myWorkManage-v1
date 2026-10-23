@@ -1,26 +1,247 @@
 @import "tailwindcss";
 
+/* 다크 모드는 <html class="dark"> 로 전환한다 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * 디자인 토큰
+ * 스타일: Minimalism & Swiss + Flat (ui-ux-pro-max "Productivity Tool")
+ * 팔레트: "SaaS (General)" 기반 — 신뢰감 있는 파랑 + 슬레이트 중립색
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --canvas: #f8fafc;
+  --surface: #ffffff;
+  --subtle: #f1f5f9;
+  --hover: #f1f5f9;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+
+  --fg: #0f172a;
+  --fg-muted: #475569;
+  --fg-subtle: #64748b;
+
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-soft: #eff6ff;
+  --primary-fg: #ffffff;
+  --ring: #2563eb;
+
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --danger-soft: #fef2f2;
+  --warning: #b45309;
+  --warning-soft: #fffbeb;
+  --success: #15803d;
+
+  /* 상태 배지 */
+  --st-todo-bg: #f1f5f9;
+  --st-todo-fg: #475569;
+  --st-todo-dot: #94a3b8;
+  --st-doing-bg: #dbeafe;
+  --st-doing-fg: #1d4ed8;
+  --st-doing-dot: #2563eb;
+  --st-done-bg: #dcfce7;
+  --st-done-fg: #15803d;
+  --st-done-dot: #16a34a;
+
+  /* 사이드바 (짙은 슬레이트) */
+  --side-bg: #0f172a;
+  --side-fg: #cbd5e1;
+  --side-muted: #94a3b8;
+  --side-hover: #1e293b;
+  --side-active: #1e3a8a;
+  --side-active-fg: #ffffff;
+  --side-line: #1e293b;
+
+  /* 간트/달력 */
+  --weekend: #f8fafc;
+  --today: #dc2626;
+  --today-soft: #eff6ff;
+
+  --shadow-pop: 0 10px 30px -10px rgb(15 23 42 / 0.25), 0 2px 6px -2px rgb(15 23 42 / 0.12);
+  --overlay: rgb(15 23 42 / 0.45);
+
+  color-scheme: light;
+}
+
+.dark {
+  --canvas: #0b1120;
+  --surface: #111827;
+  --subtle: #1a2333;
+  --hover: #1e293b;
+  --line: #1f2a3c;
+  --line-strong: #334155;
+
+  --fg: #e2e8f0;
+  --fg-muted: #a5b4c8;
+  --fg-subtle: #8a99ad;
+
+  --primary: #3b82f6;
+  --primary-hover: #60a5fa;
+  --primary-soft: #172554;
+  --primary-fg: #ffffff;
+  --ring: #60a5fa;
+
+  --danger: #f87171;
+  --danger-hover: #fca5a5;
+  --danger-soft: #3b1219;
+  --warning: #fbbf24;
+  --warning-soft: #33250b;
+  --success: #4ade80;
+
+  --st-todo-bg: #1e293b;
+  --st-todo-fg: #cbd5e1;
+  --st-todo-dot: #94a3b8;
+  --st-doing-bg: #172554;
+  --st-doing-fg: #93c5fd;
+  --st-doing-dot: #60a5fa;
+  --st-done-bg: #052e16;
+  --st-done-fg: #86efac;
+  --st-done-dot: #4ade80;
+
+  --side-bg: #070b14;
+  --side-fg: #cbd5e1;
+  --side-muted: #8a99ad;
+  --side-hover: #131c2e;
+  --side-active: #1e3a8a;
+  --side-active-fg: #ffffff;
+  --side-line: #131c2e;
+
+  --weekend: #0e1626;
+  --today: #f87171;
+  --today-soft: #172554;
+
+  --shadow-pop: 0 10px 30px -10px rgb(0 0 0 / 0.6), 0 2px 6px -2px rgb(0 0 0 / 0.4);
+  --overlay: rgb(2 6 23 / 0.65);
+
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-subtle: var(--subtle);
+  --color-hover: var(--hover);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-fg: var(--primary-fg);
+  --color-ring: var(--ring);
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-soft: var(--danger-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-success: var(--success);
+  --color-side-bg: var(--side-bg);
+  --color-side-fg: var(--side-fg);
+  --color-side-muted: var(--side-muted);
+  --color-side-hover: var(--side-hover);
+  --color-side-active: var(--side-active);
+  --color-side-active-fg: var(--side-active-fg);
+  --color-side-line: var(--side-line);
+  --color-weekend: var(--weekend);
+  --color-today: var(--today);
+  --color-today-soft: var(--today-soft);
+
+  --font-sans:
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI",
+    "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
+
+  --shadow-pop: var(--shadow-pop);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--canvas);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-feature-settings: "tnum" 0;
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+}
+
+/* 숫자 열은 고정폭 숫자 */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 키보드 포커스 링 (마우스 클릭에는 표시하지 않음) */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* 네이티브 dialog */
+dialog.app-dialog {
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow: var(--shadow-pop);
+  max-height: calc(100dvh - 48px);
+  width: min(560px, calc(100vw - 32px));
+}
+dialog.app-dialog::backdrop {
+  background: var(--overlay);
+}
+dialog.app-dialog[open] {
+  animation: dialog-in 160ms ease-out;
+}
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.toast-in {
+  animation: toast-in 180ms ease-out;
+}
+
+/* 날짜 입력의 달력 아이콘을 다크 모드에서도 보이게 */
+.dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+}
+
+/* 얇은 스크롤바 */
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
